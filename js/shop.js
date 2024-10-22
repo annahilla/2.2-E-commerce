@@ -28,12 +28,17 @@ function buy(id) {
     // 2. Add found product to the cart array
     if (cart.includes(product)) {
         product.quantity++;
-        countProduct.innerHTML = cart.length;
     } else {
         product.quantity = 1;
         cart.push(product);
-        countProduct.innerHTML = cart.length;
     };
+
+    let amountProductsInCart = 0;
+    cart.forEach(item => {
+        amountProductsInCart += item.quantity
+    });
+
+    countProduct.innerHTML = amountProductsInCart;
 }
 
 // Exercise 2
@@ -81,7 +86,7 @@ function printCart() {
 
         const newTableHeader = document.createElement("th");
         newTableHeader.setAttribute("scope", "row");
-        newTableHeader.appendChild(document.createTextNode(`${item.name}`));
+        newTableHeader.appendChild(document.createTextNode(`${item.name} `));
         newTableRow.appendChild(newTableHeader);
 
         const newTableDataForPrice = document.createElement("td");
@@ -99,13 +104,13 @@ function printCart() {
             removeFromCart(item.id)
         });
 
-        newTableDataForPrice.textContent = `$${item.price}`;
+        newTableDataForPrice.textContent = `$${item.price} `;
         newTableDataForQuantity.textContent = item.quantity;
 
         if (item.subtotalWithDiscount) {
-            newTableDataForTotal.textContent = `$${(item.subtotalWithDiscount * item.quantity).toFixed(2)}`;
+            newTableDataForTotal.textContent = `$${(item.subtotalWithDiscount * item.quantity).toFixed(2)} `;
         } else {
-            newTableDataForTotal.textContent = `$${item.price * item.quantity}`;
+            newTableDataForTotal.textContent = `$${item.price * item.quantity} `;
         }
 
         newTableRow.appendChild(newTableDataForPrice);
