@@ -87,6 +87,17 @@ function printCart() {
         const newTableDataForPrice = document.createElement("td");
         const newTableDataForQuantity = document.createElement("td");
         const newTableDataForTotal = document.createElement("td");
+        const newTableDataForDelete = document.createElement("td");
+
+        const deleteButton = document.createElement("button");
+        newTableDataForDelete.appendChild(deleteButton);
+        deleteButton.textContent = "Delete";
+        deleteButton.classList.add("btn");
+        deleteButton.classList.add("btn-danger");
+
+        deleteButton.addEventListener('click', () => {
+            removeFromCart(item.id)
+        });
 
         newTableDataForPrice.textContent = `$${item.price}`;
         newTableDataForQuantity.textContent = item.quantity;
@@ -100,17 +111,27 @@ function printCart() {
         newTableRow.appendChild(newTableDataForPrice);
         newTableRow.appendChild(newTableDataForQuantity);
         newTableRow.appendChild(newTableDataForTotal);
-
-        totalCart.innerHTML = calculateTotal();
-        console.log(calculateTotal())
+        newTableRow.appendChild(newTableDataForDelete);
     })
+    totalCart.innerHTML = cart.length === 0 ? 0 : calculateTotal();
+    countProduct.innerHTML = cart.length;
 }
 
 // ** Nivell II **
 
 // Exercise 7
 function removeFromCart(id) {
+    const productInCart = products.find(product => product.id === id);
 
+    const index = cart.indexOf(productInCart);
+    if (productInCart.quantity > 1) {
+        productInCart.quantity--;
+    } else {
+        cart.splice(index, 1);
+    }
+
+    applyPromotionsCart();
+    printCart();
 }
 
 function open_modal() {
