@@ -6,14 +6,7 @@ fetch('./products.json')
     })
     .catch(error => console.error('Error loading the JSON file:', error));
 
-// => Reminder, it's extremely important that you debug your code. 
-// ** It will save you a lot of time and frustration!
-// ** You'll understand the code better than with console.log(), and you'll also find errors faster. 
-// ** Don't hesitate to seek help from your peers or your mentor if you still struggle with debugging.
-
-// Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 var cart = [];
-
 var total = 0;
 
 const cartList = document.getElementById("cart_list");
@@ -22,10 +15,8 @@ const countProduct = document.getElementById("count_product");
 
 // Exercise 1
 function buy(id) {
-    // 1. Loop for to the array products to get the item to add to cart
     const product = products.find(product => product.id === id);
 
-    // 2. Add found product to the cart array
     if (cart.includes(product)) {
         product.quantity++;
     } else {
@@ -35,7 +26,7 @@ function buy(id) {
 
     let amountProductsInCart = 0;
     cart.forEach(item => {
-        amountProductsInCart += item.quantity
+        amountProductsInCart += item.quantity;
     });
 
     countProduct.innerHTML = amountProductsInCart;
@@ -51,7 +42,6 @@ function cleanCart() {
 
 // Exercise 3
 function calculateTotal() {
-    // Calculate total price of the cart using the "cartList" array
     let totalPrice = 0;
     cart.forEach(item => {
         totalPrice += item.price * item.quantity;
@@ -61,7 +51,6 @@ function calculateTotal() {
 
 // Exercise 4
 function applyPromotionsCart() {
-    // Apply promotions to each item in the array "cart"
     cart.forEach(item => {
         if (item.name === "Cooking oil" && item.quantity >= 3) {
             item.subtotalWithDiscount = item.price * 0.8;
@@ -75,7 +64,6 @@ function applyPromotionsCart() {
 
 // Exercise 5
 function printCart() {
-    // Fill the shopping cart modal manipulating the shopping cart dom
     cartList.innerHTML = '';
 
     applyPromotionsCart();
@@ -101,10 +89,10 @@ function printCart() {
         deleteButton.classList.add("btn-danger");
 
         deleteButton.addEventListener('click', () => {
-            removeFromCart(item.id)
+            removeFromCart(item.id);
         });
 
-        newTableDataForPrice.textContent = `$${item.price} `;
+        newTableDataForPrice.textContent = `$${(item.price).toFixed(2)} `;
         newTableDataForQuantity.textContent = item.quantity;
 
         if (item.subtotalWithDiscount) {
@@ -119,7 +107,13 @@ function printCart() {
         newTableRow.appendChild(newTableDataForDelete);
     })
     totalCart.innerHTML = cart.length === 0 ? 0 : calculateTotal();
-    countProduct.innerHTML = cart.length;
+
+    let amountProductsInCart = 0;
+    cart.forEach(item => {
+        amountProductsInCart += item.quantity
+    });
+
+    countProduct.innerHTML = amountProductsInCart;
 }
 
 // ** Nivell II **

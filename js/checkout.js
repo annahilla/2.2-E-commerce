@@ -1,10 +1,7 @@
-
 // Exercise 6
 function validate(event) {
-	event.preventDefault()
+	event.preventDefault();
 
-	var error = 0;
-	// Get the input fields
 	var fName = document.getElementById("fName");
 	var fEmail = document.getElementById("fEmail");
 	var fAddress = document.getElementById("fAddress");
@@ -12,18 +9,11 @@ function validate(event) {
 	var fPassword = document.getElementById("fPassword");
 	var fPhone = document.getElementById("fPhone");
 
-	// Get the error elements
-	var errorName = document.getElementById("errorName");
-	var errorEmail = document.getElementById("errorEmail");
-	var errorAddress = document.getElementById("errorAddress");
-	var errorLastN = document.getElementById("errorLastN");
-	var errorPassword = document.getElementById("errorPassword");
-	var errorPhone = document.getElementById("errorPhone");
-
 	const letters = /^[A-Za-z]+$/;
 	const numbers = /^[0-9]+$/;
 
-	// Validate fields entered by the user: name, phone, password, and email
+	let error = 0;
+
 	if (fName.value == "" || !fName.value.match(letters) || fName.value.length < 3) {
 		fName.classList.add("is-invalid");
 		error++;
@@ -66,10 +56,12 @@ function validate(event) {
 		fPhone.classList.remove("is-invalid");
 	}
 
-	if (error > 0) {
-		alert("Error");
-	} else {
-		alert("OK");
+	if (!error) {
+		redirect();
 	}
 
+}
+
+function redirect() {
+	window.location.href = "index.html";
 }

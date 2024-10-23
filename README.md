@@ -18,3 +18,7 @@ This is an E-commerce project made with Vanilla JavaScript with some basic funct
    ```bash
    git clone https://github.com/annahilla/2.2-E-commerce
    ```
+
+2. Open folder on your code editor.
+
+3. Open `index.html` file with Live Server.
