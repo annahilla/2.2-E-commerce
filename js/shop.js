@@ -52,10 +52,8 @@ function calculateTotal() {
 // Exercise 4
 function applyPromotionsCart() {
     cart.forEach(item => {
-        if (item.name === "Cooking oil" && item.quantity >= 3) {
-            item.subtotalWithDiscount = item.price * 0.8;
-        } else if (item.name === "Instant cupcake mixture" && item.quantity >= 10) {
-            item.subtotalWithDiscount = item.price * 0.7;
+        if (item.offer && item.quantity >= item.offer.number) {
+            item.subtotalWithDiscount = item.price * (1 - item.offer.percent / 100);
         } else {
             delete item.subtotalWithDiscount;
         }
